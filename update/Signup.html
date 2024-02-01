@@ -66,7 +66,17 @@
         border-width: 1px;
         border-color: white;
         margin-top: 50px;
+        transition: 
+          background-color 0.3s, 
+          color 0.3s, 
+          opacity 0.3s; 
       }
+        .Signup:hover {
+          background-color: #113946; 
+          color: white; 
+          opacity: 0.7; 
+          cursor:pointer;
+        }
 
       #result {
         margin-top: 10px;
@@ -353,7 +363,8 @@
         transition12 = new AFDTransition(
           this.node1,
           this.node2,
-          this.lowerCaseCharacters.concat(this.upperCaseCharacters),
+          this.lowerCaseCharacters.concat(this.upperCaseCharacters, 
+          this.digits),
           "transition12"
         );
         transition22 = new AFDTransition(
@@ -382,7 +393,6 @@
           this.node4,
           this.node4,
           this.lowerCaseCharacters.concat(this.upperCaseCharacters),
-          this.dot,
           "transition44"
         );
         transition45 = new AFDTransition(
@@ -494,8 +504,8 @@
             errors.push("Password must contain at least one digit.");
           }
     
-          if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-            errors.push("Password must contain at least one of the special characters: '-' or '_'.");
+          if (!/[!@#$%^&*(),.?":-_|<>]/.test(password)) {
+            errors.push("Password must contain at least one of the special characters:!@#$%^&*(),.?'_'");
           }
         }
     
@@ -555,7 +565,6 @@
         function getExpectedCharacter(lastValidTransitionLabel) {
         // Implement logic to determine the expected character based on the transition label
         switch (lastValidTransitionLabel) {
-       
           case "transition12":
             return "a-z, A-Z, 0-9, special characters";
           case "transition22":
@@ -563,6 +572,8 @@
           case "transition23":
             return "a-z, A-Z";
           case "transition34":
+            return "'.'";
+          case "transition44":
             return "'.'";
           case "transition45":
             return "a-z, A-Z";
@@ -572,7 +583,7 @@
             return "a-z, A-Z";
           default:
             console.log("Unknown transition label:", lastValidTransitionLabel);
-            return ""; // Return an empty string for unknown transitions
+            return " "; 
         }
       }   
       
