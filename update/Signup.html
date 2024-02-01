@@ -87,6 +87,7 @@
         border: 1px solid #c3e6cb; 
         color: #155724; 
       }
+  
 
     </style>
   </head>
@@ -121,6 +122,8 @@
     </div>
 
     <script>
+      
+
       class AFD {
         static validateStepState = {
           PASS: 0,
@@ -510,6 +513,8 @@
         if (password.length === 0) {
           resultElement.style.color = ""; // Reset color
           resultElement.textContent = ""; // Clear content
+          resultElement.classList.remove("invalid", "valid");
+
         }
       }
     
@@ -537,6 +542,16 @@
     
           invalidEmail(INVALID_EMAIL_STRING);
         }
+
+        if (email.length === 0) {
+          resultElement.style.color = ""; // Reset color
+          resultElement.textContent = ""; // Clear content
+          resultElement.classList.remove("invalid", "valid");
+
+        }
+
+       
+
         function getExpectedCharacter(lastValidTransitionLabel) {
         // Implement logic to determine the expected character based on the transition label
         switch (lastValidTransitionLabel) {
@@ -559,10 +574,9 @@
             console.log("Unknown transition label:", lastValidTransitionLabel);
             return ""; // Return an empty string for unknown transitions
         }
-      }    
-
-
-    
+      }   
+      
+      
       function invalidEmail(errorMessage) {
         resultElement.innerHTML = errorMessage;
         resultElement.classList.remove("valid");
@@ -575,6 +589,11 @@
         resultElement.classList.remove("invalid");
         resultElement.classList.add("valid");
         resultElement.style.display = "block";
+      }
+
+      function hideResult() {
+        resultElement.style.display = "none";
+        resultElement.classList.remove("invalid", "valid");
       }
     
       function onSignupClick() {
